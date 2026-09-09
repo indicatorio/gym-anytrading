@@ -55,9 +55,9 @@ class TradingEnv(gym.Env):
         self._first_rendering = None
         self.history = None
 
-    def reset(self, seed=None, options=None):
+    def reset(self, *, seed=None, options=None):
         super().reset(seed=seed, options=options)
-        self.action_space.seed(int((self.np_random.uniform(0, seed if seed is not None else 1))))
+        self.action_space.seed(seed)
 
         self._truncated = False
         self._current_tick = self._start_tick
@@ -130,7 +130,7 @@ class TradingEnv(gym.Env):
     def _render_frame(self):
         self.render()
 
-    def render(self, mode='human'):
+    def render(self):
 
         def _plot_position(position, tick):
             color = None
@@ -189,6 +189,7 @@ class TradingEnv(gym.Env):
         )
 
     def close(self):
+        super().close()
         plt.close()
 
     def save_rendering(self, filepath):

@@ -27,7 +27,7 @@ class ForexEnv(TradingEnv):
         return prices.astype(np.float32), signal_features.astype(np.float32)
 
     def _calculate_reward(self, action):
-        step_reward = 0  # pip
+        step_reward = 0.0  # pip
 
         trade = False
         if (
